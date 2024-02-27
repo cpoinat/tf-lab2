@@ -41,7 +41,7 @@ resource "docker_container" "web" {
   count = var.container_count
   image = docker_image.nginx.image_id
   name  = "web-${count.index}"
-  
+  command = ["echo $(hostname) > /usr/share/nginx/html/index.html"]  
   ports {
     internal = "80"
     external = var.starting_port + count.index
